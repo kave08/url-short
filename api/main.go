@@ -8,9 +8,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
+	e := echo.New()
 	app := fiber.New()
 
 	err := godotenv.Load()
@@ -20,7 +22,7 @@ func main() {
 
 	app.Use(logger.New())
 
-	routes.SetupRoutes(app)
+	routes.SetupRoutes(e)
 
 	log.Fatal(app.Listen(os.Getenv("APP_PORT")))
 

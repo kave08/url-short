@@ -10,11 +10,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func setupRoutes(app *fiber.App) {
-	app.Get("/:url", routes.ResolverURL)
-	app.Post("/api/v1", routes.ShortenURL)
-}
-
 func main() {
 	app := fiber.New()
 
@@ -25,7 +20,7 @@ func main() {
 
 	app.Use(logger.New())
 
-	setupRoutes(app)
+	routes.SetupRoutes(app)
 
 	log.Fatal(app.Listen(os.Getenv("APP_PORT")))
 
